@@ -1,5 +1,5 @@
 <HTML>
-<HEAD><TITLE> EJ1-Conversion IP Decimal a Binario </TITLE></HEAD>
+<HEAD><TITLE> EJ3-Direccion Red – Broadcast y Rango </TITLE></HEAD>
 <BODY>
 <?php
 echo "<h1>3.-</h1>";

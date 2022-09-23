@@ -1,5 +1,5 @@
 <HTML>
-<HEAD><TITLE> EJ1-Conversion IP Decimal a Binario </TITLE></HEAD>
+<HEAD><TITLE> EJ2-Conversion IP Decimal a Binario Sin printf </TITLE></HEAD>
 <BODY>
 <?php
 echo "<h1>2.-</h1>";
