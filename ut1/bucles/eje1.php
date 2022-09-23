@@ -12,12 +12,7 @@ for($i=0;$i!=8;$i++){ //pongo 8 ya que una ip tiene 8 bits
 	$res="$div$res"; //primero le tenemos que dar el resultado para que se coleque al reves
 }
 echo "Numero $num en binario = $res";
-/*
-$n1=5;
-$n2=2;
 
-echo($n1%$n2);
-*/
 ?>
 </BODY>
 </HTML>
