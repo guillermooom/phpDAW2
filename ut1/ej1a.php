@@ -14,10 +14,6 @@ table,th{
 </style>
 <BODY>
 <?php
-$arr=array(20);
-$cont=20;
-$suma=0;
-
 echo "<table>";
 echo "<tr>";
 	echo "<th>Indice</th>";
@@ -25,42 +21,28 @@ echo "<tr>";
 	echo "<th>Suma</th>";
 echo "</tr>";
 
-$indice=0;
+$arr=array();
+$suma=0;
+$long=20;
+$num=0;
+$i=0;
 
-//rellenamos el array
-for($i=1;$indice<=$cont;$i++){ //EMPEZAMOS DESDE EL 1 PERO TAMBIEN SIRVE EMPEZAR DESDE EL 0
-	if(primos($i)){
-		$arr[$indice]=$i;//le metemos en la posicion del contador ya que $i es el numero primo
-		$indice++;
+while($i<=$long){
+	if($num%2!=0){
+		$arr[$i]=$num;
+		$suma=$suma+$arr[$i];
+		echo "<tr>";
+		echo "<td>$i</td>";
+		echo "<td>$arr[$i]</td>";
+		echo "<td>$suma</td>";
+		echo "</tr>";
+		$i++;
 	}
-}
-
-$long=count($arr)-1;
-
-for($i=0;$i<=$long;$i++){
-	$suma=$suma+$arr[$i];
-	echo "<tr>";
-	echo "<td>$i</td>";
-	echo "<td>$arr[$i]</td>";
-	echo "<td>$suma</td>";
-	echo "</tr>";
+	$num++;
 }
 
 echo "</table>";
 
-
-//Funcion para calcular si es primo
-function primos($num){
-$primo=true;
-$indice=2;
-    while($primo && $indice<=($num/2)){
-        if($num%$indice==0){
-            $primo=false;
-        }
-        $indice++;
-    }
-	return $primo;
-}
 
 ?>
 </BODY>
