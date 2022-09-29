@@ -22,7 +22,8 @@ echo "<tr>";
 echo "</tr>";
 
 $arr=array();
-$suma=0;
+$sumai=0;
+$sumap=0;
 $long=20;
 $num=0;
 $i=0;
@@ -31,38 +32,28 @@ $i=0;
 while($i<=$long){
 	if($num%2!=0){
 		$arr[$i]=$num;
-		$suma=$suma+$arr[$i];
+		$sumai=$sumai+$arr[$i];
 		echo "<tr>";
 		echo "<td>$i</td>";
 		echo "<td>$arr[$i]</td>";
-		echo "<td>$suma</td>";
+		echo "<td>$sumai</td>";
 		echo "</tr>";
 		$i++;
+	}else{
+		$sumap=$sumap+$num;
 	}
 	$num++;
 }
 echo "</table>";
 
-$medimp=0;
-$medpar=0;
-$i=0;
-$num=0;
-while($i<=$long){
-	if($num%2!=0){
-		$medimp+=$arr[$i];
-	}else{
-		$medpar+=$arr[$i];
-	}
-	$i++;
-	$num++;
-}
+$par=0;
+$imp=0;
 
-$medpar=$medpar/$long;
-$medimp=$medimp/$long;
+$par=$sumap/$long;
+$imp=$sumai/$long;
 
-echo "<br> Media pares $medpar";
-echo "<br> Media impares $medimp";
-
+echo "<br> Media pares $par";
+echo "<br> Media impares $imp";
 ?>
 </BODY>
 </HTML>
