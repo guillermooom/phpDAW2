@@ -1,35 +1,44 @@
 <HTML>
-<HEAD><TITLE> EJ3AM</TITLE></HEAD>
+<HEAD><TITLE> EJ34M</TITLE></HEAD>
 <BODY>
 <?php
 $cont="";
 $res=0;
 $arr=[[1,2,3],
-	[4,5,6],
-	[7,8,9],
+	[7,16,15],
+	[13,8,9],
 	[10,11,12],
-	[13,14,15]];
+	[4,5,20]];
 	
 /*Mostrado por filas*/
+$may=0;
 for($i=0;$i<count($arr);$i++){
 	for($j=0;$j<count($arr[$i]);$j++){
 		$cont=$arr[$i][$j];
+		if($cont>$may){
+			$may=$cont;
+		}
 		echo "($i,$j) = $cont / ";
 	}
-	echo "<br>";
+	echo "Elemento mayor: $may <br>";
+	$may=0;
 }
 
 echo "<br>";
 echo "<br>";
 
 /*Mostrado por columnas*/
-
+$may=0;
 for($i=0;$i<count($arr[0]);$i++){
 	for($j=0;$j<count($arr);$j++){
 		$cont=$arr[$j][$i];
+		if($cont>$may){
+			$may=$cont;
+		}
 		echo "($j,$i) = $cont / ";
 	}
-	echo "<br>";
+	echo "Elemento mayor: $may <br>";
+	$may=0;
 }
 ?>
 </BODY>
