@@ -22,7 +22,8 @@ echo "<br>";
 echo "<br>";
 
 /*Mostrado por columnas*/
-for($i=0;$i<count($arr);$i++){
+
+for($i=0;$i<count($arr[0]);$i++){
 	for($j=0;$j<count($arr);$j++){
 		$cont=$arr[$j][$i];
 		echo "($j,$i) = $cont / ";
