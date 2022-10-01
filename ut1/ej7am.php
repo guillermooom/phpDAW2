@@ -5,7 +5,7 @@
 $alumnos = array(	
 	"Alumno 1" => array(
 		"Progra"=>5,
-		"BD"=>6,
+		"BD"=>3,
 		"Entornos"=>7,
 		"Lenguaje"=>3
 	),
@@ -35,7 +35,7 @@ $alumnos = array(
 	),
 	"Alumno 6" => array(
 		"Progra"=>8,
-		"BD"=>4,
+		"BD"=>1,
 		"Entornos"=>3,
 		"Lenguaje"=>8
 	),
@@ -74,10 +74,14 @@ foreach($alumnos as $nombre => $detalles)
     foreach($detalles as $indice => $al)
 	{
 		if($indice==$asig){
+			if($may==$al){
+				$nb="$nb , $nombre";
+			}
 			if($may<$al){
 				$may=$al;
 				$nb=$nombre;
 			}
+			
 			
 		}
 			
@@ -94,6 +98,9 @@ foreach($alumnos as $nombre => $detalles)
     foreach($detalles as $indice => $al)
 	{
 		if($indice==$asig){
+			if($men==$al){
+				$nb="$nb , $nombre";
+			}
 			if($men>$al){
 				$men=$al;
 				$nb=$nombre;
@@ -114,6 +121,9 @@ foreach($alumnos as $nombre => $detalles)
 	if($nombre==$nb){
 		foreach($detalles as $indice => $al)
 		{
+			if($men==$al){
+				$asig="$asig , $indice";
+			}
 			if($men>$al){
 				$men=$al;
 				$asig=$indice;
@@ -133,6 +143,9 @@ foreach($alumnos as $nombre => $detalles)
 	if($nombre==$nb){
 		foreach($detalles as $indice => $al)
 		{
+			if($may==$al){
+				$asig="$asig , $indice";
+			}
 			if($may<$al){
 				$may=$al;
 				$asig=$indice;
