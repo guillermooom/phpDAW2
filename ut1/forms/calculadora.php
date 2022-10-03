@@ -19,39 +19,42 @@ $num1=$_POST["op1"];
 $num2=$_POST["op2"];
 $opera=$_POST["ope"];
 
-function ope($n1,$n2){
+function ope($n1,$n2,$dato){
 	$resul=0;
 	$msg="";
 	
-	if($opera="suma"){
+	switch($dato){
+		case "suma":
 		$resul=$n1+$n2;
 		$msg="<p>Resultado operación $n1 + $n2 = $resul</p>";
-	}
-	
-	if($opera="resta"){
+		break;
+		
+		case "resta":
 		$resul=$n1-$n2;
 		$msg="<p>Resultado operación $n1 - $n2 = $resul</p>";
-	}
-	
-	if($opera="multi"){
+		break;
+		
+		case "multi":
 		$resul=$n1*$n2;
 		$resul=round($resul,2);
 		$msg="<p>Resultado operación $n1 * $n2 = $resul</p>";
-	}
-	
-	if($opera="division"){
-		if($opera="division" && ($n1==0 || $n2==0)){
-			$msg="<p>ERROR NO PODUEDES DIVIDIR ENTRE 0</p>";
-		}else{
-			$resul=$n1/$n2;
-			$msg="<p>Resultado operación $n1 / $n2 = $resul</p>";
+		break;
+		
+		case "division":
+		if($n1==0 || $n2==0){
+			$msg="<p>NO PUEDES DIVIDIR POR 0</p>";
+			break;
 		}
+		$resul=$n1/$n2;
+		$resul=round($resul,2);
+		$msg="<p>Resultado operación $n1 / $n2 = $resul</p>";
+		break;
 	}
-
 	return $msg;
 }
 
-echo ope($num1,$num2);
+
+echo ope($num1,$num2,$opera);	
 ?>
 </BODY>
 </HTML>
