@@ -23,13 +23,13 @@
 				<article>
 					<div>
 					<h1>CALCULADORA</h1>
-						<form name="formu" method="post" action="calculadora.php" target="_blank">
+						<form name="formu" method="post" action="calculadora.php">
 							<label for="op1">Operando 1</label>
-							<input type="text" name="op1">
+							<input type="number" name="op1">
 							<br>
 							<br>
 							<label for="op2">Operando 2</label>
-							<input type="text" name="op2">
+							<input type="number" name="op2">
 							<br>
 							<br>
 							<label for="opc">Seleccionar Operación</label>
@@ -45,7 +45,7 @@
 							<br>
 							<br>
 							<input type="submit" value="enviar" name="enviar" />
-							<!-- <input type="submit" value="borrar" name="enviar" /> -->
+							<input type="reset" value="borrar" name="enviar" />
 						</form>
 					</div>
 				</article>
