@@ -8,7 +8,7 @@ $jug=0;
 $cart=0;
 
 // Metemos el array en un variable y lo mezclamos
-echo "<br>BOLAS<br>";
+echo "<br>BOLAS<br><br>";
 $arr=arr_bolas();
 ver_arr($arr);
 
@@ -212,7 +212,7 @@ function arr_bolas(){
 //mostramos el array
 function ver_arr($ver){
 	for($i=0;$i<count($ver);$i++){
-		echo "$ver[$i]<br>";
+		echo "<img src='./images/$ver[$i].PNG' width='50px'><br><br>";
 	}
 }
 
