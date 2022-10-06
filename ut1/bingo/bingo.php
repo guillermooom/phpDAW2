@@ -3,6 +3,7 @@
 <BODY>
 <?php
 /* HECHO POR GUILLE */
+echo "<script>console.log('SE INICIÓ EL BINGO')</script>";
 $gan=60;
 $jug=0;
 $cart=0;
