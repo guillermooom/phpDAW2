@@ -11,7 +11,7 @@
 		margin-top:30px;
 		font-size:30px;
 		text-align:center;
-		margin-bottom:100px;
+		margin-bottom:25px;
 		}
 		table,td{
 		border: 1px solid black;
