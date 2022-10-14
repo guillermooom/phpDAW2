@@ -13,15 +13,13 @@
 </style>
 </HEAD>
 <BODY>
-<h1>CALCULADORA</h1>
+<h1>CONVERSOR NUMERICO</h1>
 <?php
-
-$num1=limpia($_POST["op1"]);
-$num2=limpia($_POST["op2"]);
-$opera=limpia($_POST["ope"]);
+$num1=$_POST["op1"];
+$num2=$_POST["op2"];
+$opera=$_POST["ope"];
 
 function ope($n1,$n2,$dato){
-	
 	$resul=0;
 	$msg="";
 	
@@ -53,13 +51,6 @@ function ope($n1,$n2,$dato){
 		break;
 	}
 	return $msg;
-}
-
-function limpia($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
 }
 
 

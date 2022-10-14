@@ -15,12 +15,19 @@
 <BODY>
 <h1>CONVERSOR BINARIO</h1>
 <?php
-$num=$_POST["dec"];
+$num=limpia($_POST["dec"]);
 
 function ope($n){
 	$resul=0;
 	$resul=decbin($n);
 	return $resul;
+}
+
+function limpia($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
 }
 
 $dec=ope($num);
