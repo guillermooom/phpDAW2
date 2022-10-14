@@ -18,7 +18,7 @@
 
 $num1=limpia($_POST["op1"]);
 $num2=limpia($_POST["op2"]);
-$opera=limpia($_POST["ope"]);
+$opera=$_POST["ope"];
 
 function ope($n1,$n2,$dato){
 	

@@ -10,51 +10,77 @@
 	p{
 		text-align:center;
 	}
+	table,td{
+	border: 1px solid black;
+	border-collapse:collapse;
+	text-align:left;
+	}
+	table,th{
+		border: 1px solid black;
+		width:300px;
+		text-align:center;
+	}
 </style>
 </HEAD>
 <BODY>
 <h1>CONVERSOR NUMERICO</h1>
 <?php
-$num1=$_POST["op1"];
-$num2=$_POST["op2"];
+$num=limpia($_POST["dec"]);;
 $opera=$_POST["ope"];
 
-function ope($n1,$n2,$dato){
+function ope($n,$dato){
 	$resul=0;
 	$msg="";
 	
 	switch($dato){
-		case "suma":
-		$resul=$n1+$n2;
-		$msg="<p>Resultado operación $n1 + $n2 = $resul</p>";
+		case "bina":
+		$resul=decbin($n);
+		$msg="<p>$n en Binario es $resul</p>";
 		break;
 		
-		case "resta":
-		$resul=$n1-$n2;
-		$msg="<p>Resultado operación $n1 - $n2 = $resul</p>";
+		case "octa":
+		$resul=decoct($n);
+		$msg="<p>$n en Octal es $resul</p>";
 		break;
 		
-		case "multi":
-		$resul=$n1*$n2;
-		$resul=round($resul,2);
-		$msg="<p>Resultado operación $n1 * $n2 = $resul</p>";
+		case "hexa":
+		$resul=strtoupper(dechex($n));
+		$msg="<p>$n en Hexadecimal es $resul</p>";
 		break;
 		
-		case "division":
-		if($n1==0 || $n2==0){
-			$msg="<p>NO PUEDES DIVIDIR POR 0</p>";
+		case "todo":
+			echo "<table>";
+			echo "<tr>";
+			echo "<td>Binario</td>";
+			$resul=decbin($n);
+			echo "<td>$resul</td>";
+			
+			echo "<tr>";
+			echo "<td>Ocatal</td>";
+			$resul=decoct($n);
+			echo "<td>$resul</td>";
+			
+			echo "<tr>";
+			echo "<td>Hexadecimal</td>";
+			$resul=strtoupper(dechex($n));;
+			echo "<td>$resul</td>";
+			
+			echo "</table>";
 			break;
-		}
-		$resul=$n1/$n2;
-		$resul=round($resul,2);
-		$msg="<p>Resultado operación $n1 / $n2 = $resul</p>";
-		break;
+		
 	}
 	return $msg;
 }
 
+function limpia($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
 
-echo ope($num1,$num2,$opera);	
+
+echo ope($num,$opera);	
 ?>
 </BODY>
 </HTML>
