@@ -1,5 +1,5 @@
 <HTML>
-<HEAD><TITLE> EJ1-Conversion IP Decimal a Binario </TITLE></HEAD>
+<HEAD><TITLE> Fichero 1 </TITLE></HEAD>
 <BODY>
 <?php
 $nb=limpia($_POST["nb"]);

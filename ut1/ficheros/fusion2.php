@@ -1,27 +1,28 @@
 <!doctype html>
 <html lang="es">
 	<head>
-		<title>Fucion 1</title>
+		<title>Fusion 2</title>
 		<meta charset="utf-8" />
 		<meta name="author" content="Guille" />		
 	</head>
 	<body>
 	<?php
 	if ($_SERVER["REQUEST_METHOD"]== "POST"){
-		$myfile = fopen("alumnos1.txt","a");
 		$nb=limpia($_POST["nb"]);
 		$ap1=limpia($_POST["ap1"]);
 		$ap2=limpia($_POST["ap2"]);
-		$f_nac=limpia($_POST["f_nac"]);
+		$nacim=limpia($_POST["f_nac"]);
 		$locali=limpia($_POST["loca"]);
 
-		escribir($nb,20,$myfile);
-		escribir($ap1,20,$myfile);
-		escribir($ap2,21,$myfile);
-		escribir($f_nac,9,$myfile);
-		escribir($locali,26,$myfile);
+		$myfile = fopen("alumnos2.txt","a"); //creamos el fihero
+		//fwrite($myfile,""); //limpiamos el interior
+
+		escribir($nb,$myfile);
+		escribir($ap1,$myfile);
+		escribir($ap2,$myfile);
+		escribir($nacim,$myfile);
+		escribir_u($locali,$myfile);
 		fwrite($myfile,PHP_EOL);
-		
 	}
 		function limpia($data) {
 		  $data = trim($data);
@@ -30,9 +31,13 @@
 		  return $data;
 		}
 
-		function escribir ($dato,$long,$fiche){
-			$escri=str_pad($dato,$long," ",STR_PAD_RIGHT);
+		function escribir ($dato,$fiche){
+			$long=strlen($dato)+2;
+			$escri=str_pad($dato,$long,"#",STR_PAD_RIGHT);
 			fwrite($fiche,$escri);
+		}
+		function escribir_u($dato,$fiche){
+			fwrite($fiche,$dato);
 		}
 
 	?>
