@@ -38,7 +38,7 @@
 	//PRIMER OCTETO
 	$oct1= substr($ip,0,$p1);
 	if($oct1>=1 && $oct1<=255){
-		$comp=true;
+		
 	}else{
 		$comp=false;
 		$res="El primer octeto es incorrecto";
@@ -47,7 +47,7 @@
 	//SEGUNDO OCTETO
 	$oct2= substr($ip,($p1+1),($p2-$p1));
 	if($oct2>=1 && $oct2<=255){
-		$comp=true;
+		
 	}else{
 		$comp=false;
 		$res="El segundo octeto es incorrecto ,$res";
@@ -56,7 +56,7 @@
 	//TERCER OCTETO
 	$oct3= substr($ip,($p2+1),($p3-$p2));
 	if($oct3>=1 && $oct3<=255){
-		$comp=true;
+		
 	}else{
 		$comp=false;
 		$res="El tercer octeto es incorrecto ,$res";
@@ -65,7 +65,7 @@
 	//CUARTO OCTETO
 	$oct4= substr($ip,($p3+1),$p3);
 	if($oct4>=1 && $oct4<=255){
-		$comp=true;
+		
 	}else{
 		$comp=false;
 		$res="El cuarto octeto es incorrecto ,$res";
