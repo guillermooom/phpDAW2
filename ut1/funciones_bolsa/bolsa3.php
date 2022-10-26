@@ -9,7 +9,13 @@ h2{
 <BODY>
 <?php
 $nb="";
-$nb=$_POST["opc"];
+if ($_SERVER["REQUEST_METHOD"]== "POST"){
+	if(empty($_POST["fich"])){
+		$nb="";
+	}else{
+		$nb=$_POST["opc"];
+	}
+}
 
 $fich=fopen("C:\wamp64\www\ut1\bolsa\ibex35.txt","r");
 
@@ -50,7 +56,7 @@ while(!feof($fich)){
 		El valor de Cotizacón Minima de $nb es $n7";
 	}
 }
-		fclose($fich);
+	fclose($fich);
 ?>
 <header>
 		
@@ -89,7 +95,6 @@ while(!feof($fich)){
 							<input type="reset" value="borrar" name="enviar" />
 						</form>
 						<?php
-						
 							echo $res;
 						?>
 					</div>
