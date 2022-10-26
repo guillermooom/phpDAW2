@@ -39,7 +39,8 @@
 				$dire=strpos($datos2,$dir,0);
 				$p=substr($datos2,0,$dire);
 				mkdir($p);
-				$res="Direcctorio $p no encontrado<br>Se ha creado el directorio $p";
+				$res="<h3>Operaciones del Sistema</h2>
+				<p>Direcctorio $p no encontrado<br>Se ha creado el directorio $p</p>";
 			}
 			
 		}
@@ -109,7 +110,7 @@
 							<input type="reset" value="borrar" name="enviar" />
 						</form>
 						<?php
-							echo "<p>$res</p>";
+							echo $res;
 						?>
 					</div>
 				</article>
