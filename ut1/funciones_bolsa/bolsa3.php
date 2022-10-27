@@ -9,15 +9,14 @@ h2{
 <BODY>
 <?php
 $nb="";
+$fich=fopen("C:\wamp64\www\ut1\bolsa\ibex35.txt","r");
 if ($_SERVER["REQUEST_METHOD"]== "POST"){
-	if(empty($_POST["fich"])){
+	if(empty($_POST["opc"])){
 		$nb="";
 	}else{
 		$nb=$_POST["opc"];
 	}
 }
-
-$fich=fopen("C:\wamp64\www\ut1\bolsa\ibex35.txt","r");
 
 $n1="";
 $n2="";
@@ -41,15 +40,13 @@ while(!feof($fich)){
 	$n5=fgets($fich,10);
 	$n6=fgets($fich,10);
 	$n7=fgets($fich,12);
-	$n8=fgets($fich,9);
-	$n9=fgets($fich,14);
+	$n8=fgets($fich,12);
+	$n9=fgets($fich,13);
 	$n0=fgets($fich,11);
 	
 	if(strcmp($nb,"Valor")==0 || strcmp($nb,"")==0){
 		$res="<h2>ERROR</h2>";
-	}
-	
-	if(strcmp($nb,$n1)<-2 ){
+	}elseif(strcmp($nb,$n1)>-1){
 		$res="
 		El valor de Cotizacón de $nb es $n2<br>
 		El valor de Cotizacón Maxima de $nb es $n6<br>
@@ -82,8 +79,8 @@ while(!feof($fich)){
 										$n5=fgets($fich,10);
 										$n6=fgets($fich,10);
 										$n7=fgets($fich,12);
-										$n8=fgets($fich,9);
-										$n9=fgets($fich,14);
+										$n8=fgets($fich,12);
+										$n9=fgets($fich,13);
 										$n0=fgets($fich,11);
 										echo "<option value=".$n1.">".$n1."</option>";
 									}

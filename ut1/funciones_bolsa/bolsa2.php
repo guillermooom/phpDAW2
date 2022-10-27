@@ -52,8 +52,8 @@ echo "<table>";
 			echo "<th>". fgets($fich,10)."</th>";
 			echo "<th>". fgets($fich,10)."</th>";
 			echo "<th>". fgets($fich,12)."</th>";
-			echo "<th>". fgets($fich,9)."</th>";
-			echo "<th>". fgets($fich,14)."</th>";
+			echo "<th>". fgets($fich,12)."</th>";
+			echo "<th>". fgets($fich,13)."</th>";
 			echo "<th>". fgets($fich,11)."</th>";
 			echo "</tr>";
 		}else{
@@ -65,8 +65,8 @@ echo "<table>";
 			$n5=fgets($fich,10);
 			$n6=fgets($fich,10);
 			$n7=fgets($fich,12);
-			$n8=fgets($fich,9);
-			$n9=fgets($fich,14);
+			$n8=fgets($fich,12);
+			$n9=fgets($fich,13);
 			$n0=fgets($fich,11);
 			
 			if(strcmp($nb,$n1)<-2 ){

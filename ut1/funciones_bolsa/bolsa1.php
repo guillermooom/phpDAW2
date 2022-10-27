@@ -48,8 +48,8 @@
 			echo "<td>". fgets($fich,10)."</td>";
 			echo "<td>". fgets($fich,10)."</td>";
 			echo "<td>". fgets($fich,12)."</td>";
-			echo "<td>". fgets($fich,9)."</td>";
-			echo "<td>". fgets($fich,14)."</td>";
+			echo "<td>". fgets($fich,12)."</td>";
+			echo "<td>". fgets($fich,13)."</td>";
 			echo "<td>". fgets($fich,11)."</td>";
 		}
 		echo "</tr>";
