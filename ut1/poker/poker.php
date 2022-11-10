@@ -23,6 +23,7 @@ $j_maximos=8;
 $j_minimos=4;
 $cont_j=0;
 $cartas_generadas=4;
+$bote_min=10;
 $jugadores=array();
 $nb;
 
@@ -37,37 +38,43 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
 	//COMPROBAMOS QUE EXISTA UN BOTE
 	if(empty($_POST["bote"])){
 		echo "<h3>NO HA BOTE PARA EMPEZAR A JUGAR</h3>";
-	}else{
+	}
+	else{
 		//COMPROBAR BOTE VALIDO
 		$bote=validar_bote($_POST["bote"]);
 		if(is_numeric($bote)){
-		
-			//CONTAMOS EL NUMERO DE JUGADORES
-			for($i=0;$i<$j_maximos;$i++){
-				if(!empty($_POST["nombre$i"])){
-					$cont_j++;
-					
-					//GENERAMOS UN RANDOM DE CARTAS
-					$dev=generar_cartas($cartas,$cartas_generadas);
-					
-					//SI EXISTE EL JUGADOR LO METEMOS EN UN ARRAY DE JUGADORES
-					$nb=[limpia($_POST["nombre$i"]) => $dev];
-					$jugadores[$cont_j]=$nb;
+			//COMPROBAMOS QUE EL BOTE ES MINIMO 1€
+			if($bote>=$bote_min){
+				
+				//CONTAMOS EL NUMERO DE JUGADORES
+				for($i=0;$i<$j_maximos;$i++){
+					if(!empty($_POST["nombre$i"])){
+						$cont_j++;
+						
+						//GENERAMOS UN RANDOM DE CARTAS
+						$dev=generar_cartas($cartas,$cartas_generadas);
+						
+						//SI EXISTE EL JUGADOR LO METEMOS EN UN ARRAY DE JUGADORES
+						$nb=[limpia($_POST["nombre$i"]) => $dev];
+						$jugadores[$cont_j]=$nb;
+					}
 				}
-			}
-			
-			//COMPROBAMOS QUE LOS JUGADORES SON MAYORES QUE EL MINIMO
-			if($cont_j<$j_minimos){
-				echo "<h3>NO HAY SUFICIENTES JUGADORES PARA JUGAR</h3>";
+				
+				//COMPROBAMOS QUE LOS JUGADORES SON MAYORES QUE EL MINIMO
+				if($cont_j<$j_minimos){
+					echo "<h3>NO HAY SUFICIENTES JUGADORES PARA JUGAR</h3>";
+				}else{
+					//VEMOS JUGADORES Y SUS CARTAS
+					cartas_jugadores($jugadores,$cartas_generadas);
+
+					echo "<br>";
+
+					//MOSTRAMOS LOS RESULTADOS
+					comparar_cartas($jugadores,$cartas_generadas,$bote);
+				}
 			}else{
-				//VEMOS JUGADORES Y SUS CARTAS
-				cartas_jugadores($jugadores,$cartas_generadas);
-
-				echo "<br>";
-
-				//MOSTRAMOS LOS RESULTADOS
-				comparar_cartas($jugadores,$cartas_generadas,$bote);
-			}
+				echo "<h3>EL BOTE MINIMO PARA EMPEZAR A JUGAR ES $bote_min €</h3>";
+			}	
 		}else{
 			echo "<h3>BOTE NO VALIDO</h3>";
 		}
