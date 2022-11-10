@@ -38,32 +38,38 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
 	if(empty($_POST["bote"])){
 		echo "<h3>NO HA BOTE PARA EMPEZAR A JUGAR</h3>";
 	}else{
-		$bote=$_POST["bote"];
-		//CONTAMOS EL NUMERO DE JUGADORES
-		for($i=0;$i<$j_maximos;$i++){
-			if(!empty($_POST["nombre$i"])){
-				$cont_j++;
-				
-				//GENERAMOS UN RANDOM DE CARTAS
-				$dev=generar_cartas($cartas,$cartas_generadas);
-				
-				//SI EXISTE EL JUGADOR LO METEMOS EN UN ARRAY DE JUGADORES
-				$nb=[limpia($_POST["nombre$i"]) => $dev];
-				$jugadores[$cont_j]=$nb;
-			}
-		}
+		//COMPROBAR BOTE VALIDO
+		$bote=validar_bote($_POST["bote"]);
+		if(is_numeric($bote)){
 		
-		//COMPROBAMOS QUE LOS JUGADORES SON MAYORES QUE EL MINIMO
-		if($cont_j<$j_minimos){
-			echo "<h3>NO HAY SUFICIENTES JUGADORES PARA JUGAR</h3>";
+			//CONTAMOS EL NUMERO DE JUGADORES
+			for($i=0;$i<$j_maximos;$i++){
+				if(!empty($_POST["nombre$i"])){
+					$cont_j++;
+					
+					//GENERAMOS UN RANDOM DE CARTAS
+					$dev=generar_cartas($cartas,$cartas_generadas);
+					
+					//SI EXISTE EL JUGADOR LO METEMOS EN UN ARRAY DE JUGADORES
+					$nb=[limpia($_POST["nombre$i"]) => $dev];
+					$jugadores[$cont_j]=$nb;
+				}
+			}
+			
+			//COMPROBAMOS QUE LOS JUGADORES SON MAYORES QUE EL MINIMO
+			if($cont_j<$j_minimos){
+				echo "<h3>NO HAY SUFICIENTES JUGADORES PARA JUGAR</h3>";
+			}else{
+				//VEMOS JUGADORES Y SUS CARTAS
+				cartas_jugadores($jugadores,$cartas_generadas);
+
+				echo "<br>";
+
+				//MOSTRAMOS LOS RESULTADOS
+				comparar_cartas($jugadores,$cartas_generadas,$bote);
+			}
 		}else{
-			//VEMOS JUGADORES Y SUS CARTAS
-			cartas_jugadores($jugadores,$cartas_generadas);
-
-			echo "<br>";
-
-			//MOSTRAMOS LOS RESULTADOS
-			comparar_cartas($jugadores,$cartas_generadas,$bote);
+			echo "<h3>BOTE NO VALIDO</h3>";
 		}
 	}
 }

@@ -7,6 +7,12 @@ function limpia($data) {
 	  return $data;
 }
 
+//COMPROBAR BUTE BIEN ESCRITO
+function validar_bote($b){
+	$b=str_replace(",",".",$b);
+	return $b;
+}
+
 //GENERACION DE CARTAS RANDOM
 function generar_cartas($c,$n){
 	$dev=array();
