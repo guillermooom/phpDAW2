@@ -1,0 +1,33 @@
+*{
+    line-height: 30px;
+    font-family: Calibri ;
+}
+.text-center{
+    font-family: 'Courier New';
+}
+.card-header{
+    font-weight: bold;
+    color:blueviolet
+}
+.form-group{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.form-group > input{
+    margin-left: 15px;
+    border-color: red;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+.form-group:last-of-type > input{
+    margin-left: 15px;
+    border-color: rgb(255, 196, 0);
+    border-radius: 10px;
+}
+.btn{
+    width: 100px;
+    border-color:black;
+    border-radius: 10px;
+    background-color:rgb(114, 113, 113);
+    color:white;
+}
