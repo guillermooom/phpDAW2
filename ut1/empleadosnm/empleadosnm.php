@@ -20,7 +20,6 @@ h3{
 	<input type="radio" name="ope" value="list"> LISTADO EMPLEADOS
 	<br><br>
 	<input type="submit" value="Consultar" name="enviar" />
-	<input type="reset" value="Borrar" name="enviar" />
 </form>
 <?php
 if ($_SERVER["REQUEST_METHOD"]== "POST"){
@@ -29,13 +28,13 @@ if ($_SERVER["REQUEST_METHOD"]== "POST"){
 		header("Location: alta_dpto.php");
 	}
 	if($val=="altE"){
-		header("Location: google.com");
+		header("Location: alta_emp.php");
 	}
 	if($val=="camb"){
-		header("Location: google.com");
+		header("Location: cambio_dpto.php");
 	}
 	if($val=="mod"){
-		header("Location: google.com");
+		header("Location: modificar_sal.php");
 	}
 	if($val=="list"){
 		header("Location: listado_emp.php");
