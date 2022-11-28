@@ -61,6 +61,7 @@ else if($_POST["enviar"]=="Consultar"){
 }
 
 else if($_POST["enviar"]=="Cambiar"){
+
     if ($_SERVER["REQUEST_METHOD"]== "POST"){
         $nuevoDpto = $_POST["depar"];
         $fech = $_POST["fecha"];
@@ -70,8 +71,9 @@ else if($_POST["enviar"]=="Cambiar"){
         echo "<br>ERROR no se ha introducido una fecha";
     }else{
         $conn=conexion();
-        cambio_dpto($conn,$nuevoDpto,$nb);
-        registrar_cambioDPTO($conn,$nuevoDpto,$nb,$fech);
+        registrar_cambioDPTO($conn,$nb,$fech);
+        cambio_dpto($conn,$nuevoDpto,$nb,$fech);
+       
         $conn = null;
     }
     

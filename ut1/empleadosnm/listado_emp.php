@@ -18,7 +18,7 @@ DPTO <select name="dep">
         $conn=conexion();
         $departamentos=visualizar_dpto($conn);
         foreach($departamentos as $row) {
-            echo "<option value=".$row["nombre"].">". $row["nombre"]. "</option>";
+            echo "<option value=".$row["cod_dpto"].">". $row["nombre"]. "</option>";
         }
         $conn = null;
         ?>

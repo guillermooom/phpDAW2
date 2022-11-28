@@ -27,11 +27,11 @@ function visualizar_dpto($conn){
 
 function empleados_dpto($conn,$valor){
     $stmt = $conn->prepare("SELECT emple.dni, emple.nombre, emple.salario, emple.fecha_nac
-	FROM emple, dpto
-	WHERE dpto.cod_dpto=emple.cod_dpto
-	AND dpto.nombre=:nombredpto");
+	FROM emple,dpto,emple_dpto WHERE emple_dpto.fecha_fin IS NULL 
+    AND emple.dni = emple_dpto.dni AND dpto.cod_dpto = emple_dpto.cod_dpto
+    AND dpto.cod_dpto=:codDPTO;");
 	
-	$stmt -> bindParam(':nombredpto',$valor);
+	$stmt -> bindParam(':codDPTO',$valor);
     $stmt->execute();
 
     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -73,17 +73,26 @@ function mod_salario($conn,$nb,$sal){
     echo "<br>Se actualizo el salario de $nb a $sal € ";
 }
 
-function alta_empleado($conn,$dni,$nombre,$salario,$fecha,$cod_dpto){
-    $stmt = $conn->prepare("INSERT INTO EMPLE (dni,nombre,salario,fecha_nac,cod_dpto)
-    VALUES(:dni,:nombre,:salario,:fecha,:cod_dpto);");
+function alta_empleado($conn,$dni,$nombre,$salario,$fecha){
+    $stmt = $conn->prepare("INSERT INTO EMPLE (dni,nombre,salario,fecha_nac)
+    VALUES(:dni,:nombre,:salario,:fecha);");
     $stmt->bindParam(':dni',$dni);
     $stmt->bindParam(':nombre',$nombre);
     $stmt->bindParam(':salario',$salario);
     $stmt->bindParam(':fecha',$fecha);
-    $stmt->bindParam(':cod_dpto',$cod_dpto);
-    
     $stmt->execute();
-    echo "Alta Departamaneto correcta";
+}
+
+function alta_emple_fecha($conn,$dni,$cod_dpto,$fecha_alt){
+    $stmt = $conn->prepare("INSERT INTO EMPLE_DPTO (dni,cod_dpto,fecha_inicio,fecha_fin)
+    VALUES(:dni,:cod_dpto,:fecha_alt,NULL);");
+    $stmt->bindParam(':dni',$dni);
+    $stmt->bindParam(':cod_dpto',$cod_dpto);
+    $stmt->bindParam(':fecha_alt',$fecha_alt);
+    $stmt->execute();
+
+    echo "Alta Empleado correcta";
+    
 }
 
 function contar_dpto($conn){
@@ -119,8 +128,8 @@ function añadir_dpto($conn,$val,$nombr){
 
 function ver_dpto($conn,$valor){
     $stmt = $conn->prepare("SELECT dpto.nombre
-	FROM emple, dpto
-	WHERE dpto.cod_dpto=emple.cod_dpto
+	FROM emple, dpto,emple_dpto
+	WHERE dpto.cod_dpto=emple_dpto.cod_dpto AND emple_dpto.dni=emple.dni
 	AND emple.dni=:dniEmp");
 
     $stmt -> bindParam(':dniEmp',$valor);   
@@ -132,24 +141,26 @@ function ver_dpto($conn,$valor){
     return $result;
 }
 
-function cambio_dpto($conn,$codDpto,$nb){
-    $stmt = $conn->prepare("UPDATE EMPLE SET cod_dpto=:dpto WHERE dni=:dniEmp;");
-        
-    $stmt -> bindParam(':dpto',$codDpto);
-    $stmt -> bindParam(':dniEmp',$nb);
-    $stmt->execute();
-
-    echo "<br>Se actualizo el Departamento de $nb a $codDpto ";
-}
-
-function registrar_cambioDPTO($conn,$codDpto,$nb,$fec){
-    $stmt = $conn->prepare("INSERT INTO EMPLE_DPTO (cod_dpto,dni,fecha_inicio,FECHA_FIN)
-    VALUES(:codDp,:nom,:fecha,'2000-11-11');");
+function registrar_cambioDPTO($conn,$nb,$fec){
     
-    $stmt -> bindParam(':codDp',$codDpto);
-    $stmt -> bindParam(':nom',$nb);
+    $stmt = $conn->prepare("UPDATE EMPLE_DPTO SET FECHA_FIN = :fecha
+    WHERE DNI = :dni;");
+    
+    $stmt -> bindParam(':dni',$nb);
     $stmt -> bindParam(':fecha',$fec);
     $stmt->execute();
 
+}
+
+function cambio_dpto($conn,$codDpto,$nb,$fecha_i){
+    $stmt = $conn->prepare("INSERT INTO EMPLE_DPTO (COD_DPTO,DNI,FECHA_INICIO,FECHA_FIN)
+    VALUES (:cod_dpto,:dni,:fecha,NULL);");
+        
+    $stmt -> bindParam(':cod_dpto',$codDpto);
+    $stmt -> bindParam(':dni',$nb);
+    $stmt -> bindParam(':fecha',$fecha_i);
+    $stmt->execute();
+
+    echo "<br>Se actualizo el Departamento de $nb a $codDpto ";
 }
 ?>

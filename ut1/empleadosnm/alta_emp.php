@@ -25,6 +25,9 @@ h3{
     <label type="date" name="fecha">Fecha Nacimiento <input name="fecha"></label>
     <br>
     <br>
+    <label type="date" name="fecha_alt">Fecha Alta <input name="fecha_alt"></label>
+    <br>
+    <br>
     DPTO <select name="dep">
         <?php
         $conn=conexion();
@@ -49,12 +52,14 @@ else{
     $nombre=$_POST["nb"];
     $salario=$_POST["sal"];
     $fecha=$_POST["fecha"];
+    $fecha_alt=$_POST["fecha_alt"];
     $cod_dpto=$_POST["dep"];
-    if($dni=="" || $nombre=="" || $salario=="" || $fecha==""){
+    if($dni=="" || $nombre=="" || $salario=="" || $fecha=="" || $fecha_alt==""){
         echo "ERROR: Uno de los campos no ha sido rellenados";
     }else{
         $conn=conexion();
-        alta_empleado($conn,$dni,$nombre,$salario,$fecha,$cod_dpto);
+        alta_empleado($conn,$dni,$nombre,$salario,$fecha);
+        alta_emple_fecha($conn,$dni,$cod_dpto,$fecha_alt);
 
     $conn=null;
     }

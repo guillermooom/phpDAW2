@@ -20,7 +20,6 @@ DNI <select name="dep">
         $verDNI=ver_dni($conn);
         foreach($verDNI as $row) {
             echo "<option value=".$row["dni"].">". $row["dni"]. "</option>";
-            $nb=$row["dni"];
         }
         $conn = null;
     ?>
