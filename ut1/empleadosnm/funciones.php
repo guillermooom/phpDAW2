@@ -129,7 +129,7 @@ function añadir_dpto($conn,$val,$nombr){
 function ver_dpto($conn,$valor){
     $stmt = $conn->prepare("SELECT dpto.nombre
 	FROM emple, dpto,emple_dpto
-	WHERE dpto.cod_dpto=emple_dpto.cod_dpto AND emple_dpto.dni=emple.dni
+	WHERE emple_dpto.fecha_fin IS NULL AND dpto.cod_dpto=emple_dpto.cod_dpto AND emple_dpto.dni=emple.dni
 	AND emple.dni=:dniEmp");
 
     $stmt -> bindParam(':dniEmp',$valor);   

@@ -54,6 +54,7 @@ else if($_POST["enviar"]=="Consultar"){
         $conn = null;
         echo "</select>
         <br><br>
+        <input type='hidden' name='oculto' value=$dni>
         <label for=nSal>Fecha Actual <input name='fecha' placeholder='xxxx-xx-xx'></label>
         <br><br>
         <input type='submit' value='Cambiar' name='enviar' />
@@ -61,8 +62,8 @@ else if($_POST["enviar"]=="Consultar"){
 }
 
 else if($_POST["enviar"]=="Cambiar"){
-
     if ($_SERVER["REQUEST_METHOD"]== "POST"){
+        $nb=$_POST["oculto"];
         $nuevoDpto = $_POST["depar"];
         $fech = $_POST["fecha"];
     }

@@ -44,6 +44,7 @@ else if($_POST["enviar"]=="Consultar"){
 
     echo "
     <h4>Cambiar Salario</h4>
+        <input type='hidden' name='oculto' value=$dni>
         <label for=nSal>Nuevo Salario <input name='nSal'></label>
         <input type='submit' value='Cambiar' name='enviar' />
     </form>";
@@ -51,6 +52,7 @@ else if($_POST["enviar"]=="Consultar"){
 
 else if($_POST["enviar"]=="Cambiar"){
     if ($_SERVER["REQUEST_METHOD"]== "POST"){
+        $nb=$_POST["oculto"];
         $sal = $_POST["nSal"];
     }
     if($sal==""){
