@@ -16,6 +16,7 @@ h3{
 <?php
     require("funciones.php");
 ?>
+<a href="./index.html">Inicio</a>
 <br><br>
 <h3>Añadir Productos </h3>
 <form name="formu" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
