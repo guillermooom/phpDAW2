@@ -11,6 +11,7 @@ function conexion(){
     }
     catch(PDOException $e) {
         echo "Error: " . $e->getMessage();
+        echo "<h1>ERROR CODE</h1>".$error=$e->getCode();
     }
     return $conn; 
 }
@@ -194,37 +195,42 @@ y lo vamos a mostrarlo en forma de opciones de formulario
 */
 
 function addCantidad($conn,$loc,$producto,$cant){
-    $stmt = $conn->prepare("UPDATE ALMACENA SET CANTIDAD = CANTIDAD+:cant WHERE
-        NUM_ALMACEN = :numA AND ID_PRODUCTO = :idP;");
+    $esta=false;
 
-    $stmt -> bindParam(':numA',$loc);
-    $stmt -> bindParam(':idP',$producto);
-    $stmt -> bindParam(':cant',$cant);
+    $stmt = $conn->prepare("SELECT NUM_ALMACEN, ID_PRODUCTO FROM ALMACENA");
     $stmt->execute();
-    if($stmt->execute()==false){
+
+    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $result = $stmt->fetchAll();
+
+    foreach($result as $row) {
+        if($row["NUM_ALMACEN"]==$loc && $row["ID_PRODUCTO"]==$producto){
+            $stmt = $conn->prepare("UPDATE ALMACENA SET CANTIDAD = CANTIDAD+:cant WHERE
+            NUM_ALMACEN = :numA AND ID_PRODUCTO = :idP;");
+            $stmt -> bindParam(':numA',$loc);
+            $stmt -> bindParam(':idP',$producto);
+            $stmt -> bindParam(':cant',$cant);
+            $stmt->execute();
+            $esta=true;
+            echo "Añadidos <b> $cant </b> productos con codigo <b>$producto</b> ";
+        }
+    }
+
+    if($esta==false){
         $stmt = $conn->prepare("INSERT INTO ALMACENA (NUM_ALMACEN,ID_PRODUCTO,CANTIDAD)
-        VALUES (:numA, :idP, :cant);");
+        VALUES (:numA, :idP, :cant)");
         $stmt -> bindParam(':numA',$loc);
         $stmt -> bindParam(':idP',$producto);
         $stmt -> bindParam(':cant',$cant);
         $stmt->execute();
+        echo "Registrado el producto con codigo <b>$producto</b> una cantidad de <b> $cant </b>";
     }
-    else $stmt->execute();
-    echo "Registrado el producto con codigo <b>$producto</b> una cantidad de <b> $cant </b>";
 }/*
 Recibiremos la conexion y una varaible que será la localidad,
 le meteremos a variable $stmt la sentencia SQL a ejecutar,
 remplazaremos el valor a introducir por el que recibimos
 de fuera de la funcion, ejecutamos y mostramos mensaje de confirmacion
 */
-
-/* FUNCIONA PERO HAY Q APAÑARLO 
-    $stmt = $conn->prepare("INSERT INTO ALMACENA (NUM_ALMACEN,ID_PRODUCTO,CANTIDAD)
-    VALUES (:numA, :idP, :cant);");
-    
-    stmt = $conn->prepare("UPDATE ALMACENA SET CANTIDAD = CANTIDAD+:cant WHERE
-    NUM_ALMACEN = :numA AND ID_PRODUCTO = :idP;");
-}*/
 
 function consultarStock($conn,$pro){
     $stmt = $conn->prepare("SELECT LOCALIDAD, CANTIDAD FROM ALMACEN, ALMACENA
@@ -345,12 +351,36 @@ function totalCompras($conn,$nombre,$fin,$inicio){
     $result = $stmt->fetchAll();
     
     foreach($result as $dat){
-        echo " Total de todas las Compras de <b>". $dat["SUM(PRECIO*UNIDADES)"]." €</b><br>";
+        echo " Total de todas las Compras del Usuario con DNI $nombre es <b>". $dat["SUM(PRECIO*UNIDADES)"]." €</b><br>";
     }
 }
-/*INSERT INTO CLIENTE (NIF,NOMBRE,APELLIDO) VALUES('00000000X','YO','MISMO');
 
-INSERT INTO COMPRA (NIF,ID_PRODUCTO,FECHA_COMPRA,UNIDADES) VALUES ('00000000X','P0001','2022-12-14',2);
-*/
+function altaUsuarios($conn,$nif,$nb,$ape,$cp,$dir,$ciu){
+    $stmt = $conn->prepare("INSERT INTO CLIENTE (NIF,NOMBRE,APELLIDO,CP,DIRECCION,CIUDAD)
+    VALUES(:nif,:nombre,:apellido,:cp,:direccion,:ciudad)");
+
+    $stmt -> bindParam(':nif',$nif);
+    $stmt -> bindParam(':nombre',$nb);
+    $stmt -> bindParam(':apellido',$ape);
+    $stmt -> bindParam(':cp',$cp);
+    $stmt -> bindParam(':direccion',$dir);
+    $stmt -> bindParam(':ciudad',$ciu);
+    $stmt->execute();
+
+    echo $nb." ".$ape." Añadido correctamente";
+}
+
+function compraHecha($conn,$cli,$pro,$cant,$fecha){
+    $stmt = $conn->prepare("INSERT INTO COMPRA (NIF,ID_PRODUCTO,FECHA_COMPRA,UNIDADES)
+    VALUES(:nif,:producto,:fecha,:unidades)");
+
+    $stmt -> bindParam(':nif',$cli);
+    $stmt -> bindParam(':producto',$pro);
+    $stmt -> bindParam(':fecha',$fecha);
+    $stmt -> bindParam(':unidades',$cant);
+    $stmt->execute();
+
+    echo " Compra Realizada correctamente";
+}
 ?>
 

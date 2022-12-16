@@ -57,7 +57,6 @@ if(!empty($_POST)){
             $localidad = $_POST["localidades"];
             $producto = $_POST["producto"];
         }
-
         addCantidad($conn,$localidad,$producto,$cantidad);
         $conn = null;
     }
