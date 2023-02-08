@@ -23,7 +23,7 @@
     <input type="submit" value="Añadir Bolsa" name="enviar" />
     <input type="submit" value="Comprar" name="enviar" />
     <br><br>
-    <label type="text" name="tarjeta">Tarjeta <input type="text" min="0" name="tarjeta" placeholder="XX00000"></label>
+    <label type="text" name="tarjeta">Tarjeta <input type="text" min="1" name="tarjeta" placeholder="XX00000"></label>
 </form>
 <?php
 $realizar=true;
@@ -54,7 +54,7 @@ if(!empty($_POST)){
        
     }
     else{
-        if( $_POST["cantidad"]=="" || $_POST["cantidad"]==0){
+        if( $_POST["cantidad"]=="" && $_POST["enviar"]!="Comprar"){
             echo "<p id='err'>Error: No se ha introducio una cantidad</p>";
             $realizar=false;
         }
